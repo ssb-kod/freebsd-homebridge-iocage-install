@@ -1,0 +1,11 @@
+# homebridge-config - sourced by freebsd-homebridge-iocage.sh
+# Required - jail ip address and router address
+# as of 10/2026 UI version 5.28 and 5.29 are not working on freebsd with this install
+JAIL_IP="xxx.xxx.x.xx/24"
+DEFAULT_GW_IP="192.168.1.1 or 10.0.1.1 etc"
+
+# Optional (defaults shown)
+#JAIL_NAME="homebridge"
+#JAIL_INTERFACES="vnet0:bridge0"
+#UI_PORT="8581"
+#UI_VERSION="5.27.0"
