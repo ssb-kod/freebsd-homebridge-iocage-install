@@ -13,12 +13,13 @@ On the OpenCORE / TrueNAS CORE host, as root:
 git clone https://github.com/ssb-kod/freebsd-homebridge-iocage-install.git
 cd freebsd-homebridge-iocage-install
 cp homebridge-config.example homebridge-config
-vi homebridge-config      # set JAIL_IP and DEFAULT_GW_IP
+nano homebridge-config
 chmod +x freebsd-homebridge-iocage.sh freebsd-homebridge-install.sh
 script homebridge-iocage-install.log ./freebsd-homebridge-iocage.sh
 ```
 
-When script completes go to `http://<jail ip>:8581`. The script also copies `freebsd-homebridge-install.sh` into the jail's `/root` as a rescue script (see Option 2).
+In `homebridge-config`, set `JAIL_IP` and `DEFAULT_GW_IP` (in nano: Ctrl+O, Enter to save, Ctrl+X to exit; on plain FreeBSD use `ee`). Then go to `http://<jail ip>:8581`. The script also copies `freebsd-homebridge-install.sh` into the jail's `/root` as a rescue script (see Option 2).
+
 ***Please note "SSH access (root login enabled - tighten after setup if desired)". Don't forget to login to the jail's shell directly to create a root password via 'passwd' command to enable ssh logins into the jail. ssh root@'jail-ip' will not allow logins prior to this step although the web ui will function.
 
 ## Option 2: Install inside an existing jail or on a plain FreeBSD machine

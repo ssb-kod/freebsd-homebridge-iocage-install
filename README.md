@@ -34,8 +34,8 @@ Option 1 :  On the host, as root:
 ```sh
 git clone https://github.com/ssb-kod/freebsd-homebridge-iocage-install.git
 cd freebsd-homebridge-iocage-install
-cp homebridge-config.example homebridge-config   # or edit homebridge-config directly
-vi homebridge-config                              # set JAIL_IP and DEFAULT_GW_IP
+cp homebridge-config.example homebridge-config
+nano homebridge-config
 chmod +x freebsd-homebridge-iocage.sh
 script homebridge-iocage-install.log ./freebsd-homebridge-iocage.sh
 ```
