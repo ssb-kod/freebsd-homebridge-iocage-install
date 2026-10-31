@@ -185,7 +185,7 @@ iocage exec "${JAIL_NAME}" npm -g ls --depth=0
 
 echo "---------------"
 echo "Installation complete."
-echo "---------------"
+echo "Testing install..."
 sleep 5   # give the UI time to start before checking
 iocage exec "${JAIL_NAME}" hb-service status
 #
