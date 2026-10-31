@@ -89,7 +89,7 @@ npm -g ls --depth=0
 
 echo "---------------"
 echo "Installation complete."
-echo "---------------"
+echo "Testing install..."
 sleep 5   # give the UI time to start before checking
 hb-service status
 echo "If 'Homebridge UI running' is shown above, browse to http://<this machine's IP>:${UI_PORT}"
