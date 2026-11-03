@@ -1,6 +1,6 @@
-# Install Homebridge on FreeBSD 15 or in an iocage created jail. OpenCORE (TrueNAS CORE)
+# Install Homebridge on FreeBSD 15 or in an iocage created jail. FreeCORE (TrueNAS CORE)
 
-A scripted install of [Homebridge](https://homebridge.io) and the Homebridge UI (homebridge-config-ui-x) in an iocage jail, run from the FreeBSD / OpenCORE. It creates the jail, installs Node.js 24 from FreeBSD packages, builds the UI's native terminal module, and installs Homebridge as a service with `hb-service` which runs as user 'homebridge'.
+A scripted install of [Homebridge](https://homebridge.io) and the Homebridge UI (homebridge-config-ui-x) in an iocage jail, run from the FreeBSD / FreeCORE. It creates the jail, installs Node.js 24 from FreeBSD packages, builds the UI's native terminal module, and installs Homebridge as a service with `hb-service` which runs as user 'homebridge'.
 
 The Web UI is available as soon as the script finishes.
 
@@ -8,7 +8,7 @@ The Web UI is available as soon as the script finishes.
 
 | Component | Version |
 |---|---|
-| Host | OpenCORE (FreeBSD 15.x) |
+| Host | FreeCORE (FreeBSD 15.x) |
 | Jail release | FreeBSD 15.1-RELEASE |
 | Node.js | 24.21.0 (`node24` pkg) |
 | npm | 12.0.2 (`npm-node24` pkg) |
@@ -17,13 +17,13 @@ The Web UI is available as soon as the script finishes.
 | homebridge-config-ui-x | 5.27.0 (pinned) |
 | node-gyp | 13.1.0 |
 
-Only OpenCORE on FreeBSD 15 has been tested. Previous versions ran on TrueNAS CORE 13.3 but unfortunately FreeBSD 13 pkg support has ended.
+Only FreeCORE on FreeBSD 15 has been tested. Previous versions ran on TrueNAS CORE 13.3 but unfortunately FreeBSD 13 pkg support has ended.
 
 FreeBSD is not an officially supported Homebridge platform.
 
 ## Requirements
 
-- OpenCORE (~TrueNAS CORE 15.0) or plain FreeBSD host with iocage set up, and root access
+- FreeCORE (~TrueNAS CORE 15.0) or plain FreeBSD host with iocage set up, and root access
 - A free static IP on your LAN for the jail
 - VNET-capable bridge (defaults to `vnet0:bridge0`)
 
