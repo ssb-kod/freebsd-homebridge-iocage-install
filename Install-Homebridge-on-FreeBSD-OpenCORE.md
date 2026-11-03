@@ -1,4 +1,4 @@
-# Install Homebridge on FreeBSD 15 or in an iocage created jail. OpenCORE (TrueNAS CORE)
+# Install Homebridge on FreeBSD 15 or in an iocage created jail. FreeCORE (TrueNAS CORE)
 
 
 This guide includes 2 options to help one install Homebridge v2.x with a working Homebridge UI on freeBSD. Option 1 creates an iocage homebridge jail. Option 2 covers installing directly within an existing jail or plain FreeBSD install. Either option will result in a working homebridge install within minutes of starting the script. No additional commands are necessary.  Note Homebridge v2.x runs using `hb-service` commands.
@@ -7,7 +7,7 @@ This guide includes 2 options to help one install Homebridge v2.x with a working
 
 A script that does every step below is maintained here: **https://github.com/ssb-kod/freebsd-homebridge-iocage-install**
 
-On the OpenCORE / TrueNAS CORE host, as root:
+On the FreeCORE / TrueNAS CORE host, as root:
 
 ```sh
 git clone https://github.com/ssb-kod/freebsd-homebridge-iocage-install.git
@@ -65,7 +65,7 @@ cd /root && script homebridge-install.log ./freebsd-homebridge-install.sh
 ## Notes and troubleshooting
 
 - **FreeBSD is not an officially supported platform. This guide is community maintained.
-- **Last tested:** October 2026, Intel CPU OpenCORE host with a FreeBSD 15.1-RELEASE jail, Node.js 24, Homebridge 2.4.0, homebridge-config-ui-x 5.27.0..
+- **Last tested:** October 2026, Intel CPU FreeCORE host with a FreeBSD 15.1-RELEASE jail, Node.js 24, Homebridge 2.4.0, homebridge-config-ui-x 5.27.0..
 
 - **Updating Node.js:** use `pkg upgrade` in the jail. `hb-service update-node` does not apply on FreeBSD. 
 - **node-gyp conflict between pkg installed and npm installed versions may occur. The --force option of 'npm install -g --force node-gyp' fixed this to allow for a successful homebridge-config-ui-x@5.27.0  install.
@@ -80,7 +80,7 @@ cd /root && script homebridge-install.log ./freebsd-homebridge-install.sh
     homebridge 82138  0.0  0.3 1124192 113396  -  SJ   18:12   0:07.22 node: homebridge: @homebridge-plugins/homebridge-camera-ffmpeg (node)
     root       94795  0.0  0.0   14260   2716  1  S+J  20:16   0:00.00 grep homebridge
 
-- **'npm ls' and 'npm -g' ls are usefull commands to display and confirm installs and locations. For manual installs use the '-g' global option. Example ...
+- **'npm ls' and 'npm -g' ls are usefull commands to display and confirm installs and locations. For manual installs always use the '-g' global option. If the -g is omitted the npm packages will be installed locally into the root folder where the homebridge user can not access unless root folder permissions are changed. Example ...
     root@homebridge:~ # npm ls
     /root
     └── (empty)
@@ -97,7 +97,7 @@ cd /root && script homebridge-install.log ./freebsd-homebridge-install.sh
 - **Backups:** use **Backup** in the UI before destroying or rebuilding the jail. Also don't forget to snapshot the jail prior to pkg updates in case of problems to allow for an easy recovery.
 
 - **The older FreeNAS 9.10 / FreeBSD 11 guides with "service homebridge start" commands do not enable the newer 'hb-service mode' which is necessary for homebridge v2.x. installs. If these are also used this may result in multiple conflicting homebridge processes running. Also **No avahi/dbus needed:** Homebridge's default mDNS advertiser (Ciao) works in a VNET jail. Prior guides installed avahi but this crashes the UI start up and requires "pkill -f homebridge" prior to successfully starting with "hb-service start".
-- **TrueNAS CORE 13.3 is untested as it would need FreeBSD 13 pkg support which unfortunately is no longer available via freebsd.org sources now that FreebBSD 13 is end of life. That said I am currently still running a legacy TrueNAS install of homebridge v1.11 and ui-x v5.24 in a freebsd 13.5 jail with a working eufy-security plugin installed via an earlier version of this script. Theoretically should work if there is a local freebsd 13 pkg repository available which can be built from cached pkg files from other jails.
+- **TrueNAS CORE 13.3 is untested as it would need FreeBSD 13 pkg support which unfortunately is no longer available via freebsd.org sources now that FreebBSD 13 is end of life. That said I am currently still running a legacy TrueNAS install of homebridge v1.11 and ui-x v5.24 in a freebsd 13.5 jail with a working eufy-security plugin installed via an earlier version of this script. Theoretically should work if there is a local freebsd 13 pkg repository available which could be built from cached pkg files from other jails if available.
 
 -Credits
 Iocage jail script is a highly modified but originated from an iocage Zoneminder install script obtained from "https://github.com/tschettervictor/bsd-apps".
