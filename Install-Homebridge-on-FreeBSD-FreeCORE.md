@@ -65,20 +65,22 @@ cd /root && script homebridge-install.log ./freebsd-homebridge-install.sh
 ## Notes and troubleshooting
 
 - **FreeBSD is not an officially supported platform. This guide is community maintained.
-- **Last tested:** October 2026, Intel CPU FreeCORE host with a FreeBSD 15.1-RELEASE jail, Node.js 24, Homebridge 2.4.0, homebridge-config-ui-x 5.27.0..
+- **Last tested:** November 2026, Intel CPU FreeCORE host with a FreeBSD 15.1-RELEASE jail, Node.js 24, Homebridge 2.4.0, homebridge-config-ui-x 5.27.0. and with updated script 5.30.
 
 - **Updating Node.js:** use `pkg upgrade` in the jail. `hb-service update-node` does not apply on FreeBSD. 
 - **node-gyp conflict between pkg installed and npm installed versions may occur. The --force option of 'npm install -g --force node-gyp' fixed this to allow for a successful homebridge-config-ui-x@5.27.0  install.
 
-- **Don't update Homebridge UI from the web UI.** which currently breaks the install on FreeBSD. If it happens, run the rescue script above. 5.27.0 is the last UI version confirmed to build here.
+- **Don't update Homebridge UI from the web UI.** which currently breaks the install on FreeBSD. If it happens, run the rescue script.
 
-- **to find homebridge related processes ...  'pkill -f homebridge' kills all of them.
+- **to find homebridge related processes ...
     root@homebridge:~ # ps aux | grep homebridge
     homebridge 81713  0.0  0.0   14204   2492  -  IsJ  18:12   0:00.00 daemon: /usr/local/lib/node_modules/homebridge-config-ui-x/dist/bin/hb-service.js[81714] (daemon)
     homebridge 81714  0.0  0.4 1156956 148352  -  SJ   18:12   0:18.45 node: hb-service (node)
     homebridge 82126  0.0  0.3 1128800 115488  -  SJ   18:12   0:07.49 node: homebridge (node)
     homebridge 82138  0.0  0.3 1124192 113396  -  SJ   18:12   0:07.22 node: homebridge: @homebridge-plugins/homebridge-camera-ffmpeg (node)
     root       94795  0.0  0.0   14260   2716  1  S+J  20:16   0:00.00 grep homebridge
+
+- **'pkill -f homebridge' kills all of the above.
 
 - **'npm ls' and 'npm -g' ls are usefull commands to display and confirm installs and locations. For manual installs always use the '-g' global option. If the -g is omitted the npm packages will be installed locally into the root folder where the homebridge user can not access unless root folder permissions are changed. Example ...
     root@homebridge:~ # npm ls
@@ -101,5 +103,5 @@ cd /root && script homebridge-install.log ./freebsd-homebridge-install.sh
 
 -Credits
 Iocage jail script is a highly modified but originated from an iocage Zoneminder install script obtained from "https://github.com/tschettervictor/bsd-apps".
-Of course Claude and to some extent Gemini contributed to the install debugging, scripts and instructions.
+Of course Claude and to some extent Gemini contributed to the install debugging, scripts, patching and instructions.
 Good luck!
