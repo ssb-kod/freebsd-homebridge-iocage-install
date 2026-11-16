@@ -29,7 +29,7 @@ INTERFACE="vnet0"
 VNET="on"
 JAIL_NAME="homebridge"
 UI_PORT="8581"
-UI_VERSION="5.30.0"      # tested: 5.30.0 and 5.27.0 work; 5.28.x/5.29.x fail on FreeBSD
+UI_VERSION="5.30.1"      # tested: 5.30.(0,1) and 5.27.0 work; 5.28.x/5.29.x fail on FreeBSD
 HB_STORAGE="/var/lib/homebridge"
 CONFIG_NAME="homebridge-config"
 
