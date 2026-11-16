@@ -40,9 +40,31 @@ export PYTHON=/usr/local/bin/python3
 #
 #####
 
-echo "Installing packages"
-env ASSUME_ALWAYS_YES=yes pkg install node24 npm-node24 python3 openssl gcc \
-  nss_mdns ffmpeg sudo git nano || { echo "pkg install failed"; exit 1; }
+# Only install what's missing. Packages already installed are left alone, so a
+# locked package (e.g. a custom-built ffmpeg) doesn't stop the script.
+# Upgrade installed packages yourself with "pkg upgrade".
+PKGS="node24 npm-node24 python3 openssl gcc nss_mdns ffmpeg sudo git nano"
+MISSING=""
+for p in ${PKGS}; do
+  env ASSUME_ALWAYS_YES=yes pkg info -e "${p}" || MISSING="${MISSING} ${p}"
+done
+
+if [ -n "${MISSING}" ]; then
+  echo "Installing packages:${MISSING}"
+  # shellcheck disable=SC2086
+  env ASSUME_ALWAYS_YES=yes pkg install ${MISSING} || \
+    echo "WARNING: pkg install reported an error; continuing if the required tools are present"
+else
+  echo "All packages already installed; skipping pkg install"
+fi
+
+# Stop only if something the install can't do without is missing
+for t in /usr/local/bin/node /usr/local/bin/npm "${PYTHON}"; do
+  if ! [ -x "${t}" ]; then
+    echo "Required tool missing: ${t} (check the pkg output above)"
+    exit 1
+  fi
+done
 
 #####
 #
