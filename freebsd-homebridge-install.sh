@@ -27,7 +27,7 @@ fi
 
 # Settings (override with environment variables)
 UI_PORT="${UI_PORT:-8581}"
-UI_VERSION="${UI_VERSION:-5.30.0}"   # tested: 5.30.0 and 5.27.0 work; 5.28.x/5.29.x fail on FreeBSD
+UI_VERSION="${UI_VERSION:-5.30.1}"   # tested: 5.30.(0,1) and 5.27.0 work; 5.28.x/5.29.x fail on FreeBSD
 HB_STORAGE="${HB_STORAGE:-/var/lib/homebridge}"
 HB_USER="homebridge"
 HB_UID="1030"
@@ -191,4 +191,6 @@ npm -g ls
 echo "---------------"
 echo "show ffmpeg version and if fdk-aac encoder is present --> if only 'AAC (Advanced Audio Coding)' is present and not also 'Fraunhofer FDK AAC' then ffmpeg wiil work for streaming video only. If video streaming with audio is desired then ffmpeg will need to be built from ports to include 'FDK AAC'"
 pkg info | grep ffmpeg && ffmpeg -hide_banner -encoders --version | grep aac
+echo "---------------"
+echo 'ps aux | grep homebridge'
 ps aux | grep homebridge
