@@ -14,10 +14,10 @@ The Web UI is available as soon as the script finishes.
 | npm | 12.0.2 (`npm-node24` pkg) |
 | Python | 3.12 |
 | Homebridge | 2.5.0 |
-| homebridge-config-ui-x | 5.30.0 (pinned) |
+| homebridge-config-ui-x | 5.30.1 (pinned) |
 | node-gyp | 13.1.0 |
 
-FreeBSD 15.1 jails on FreeCORE 15.0 with ui-x 5.27.0, 5.30.0 tested successfully with most recent patch. homebridge-camera-ffmpeg with Homekit Secure Video is working.
+FreeBSD 15.1 jails on FreeCORE 15.0 with ui-x 5.27.0, 5.30.(0,1) tested successfully with most recent patch. homebridge-camera-ffmpeg with Homekit Secure Video is working.
 
 FreeBSD is not an officially supported Homebridge platform.
 
@@ -80,7 +80,7 @@ The log is named `homebridge-install.log` so it isn't confused with Homebridge's
 | `JAIL_NAME` | no | `homebridge` | |
 | `JAIL_INTERFACES` | no | `vnet0:bridge0` | |
 | `UI_PORT` | no | `8581` | |
-| `UI_VERSION` | no | `5.30.0` | See [Known issues](#known-issues) |
+| `UI_VERSION` | no | `5.30.1` | See [Known issues](#known-issues) |
 
 ## What the script does
 
@@ -107,7 +107,7 @@ Plugins and Homebridge itself can be updated from the web UI. Don't update **Hom
 
 ## Known issues
 
-- **config-ui-x is pinned to 5.30.0.** 5.28.0 & 5.29.0 versions failed the node-pty build in earlier testing. npm 12 now blocks the package's install scripts entirely, and the script's manual `node-gyp rebuild` is what actually builds the module, so newer versions may work. Test with `UI_VERSION=` in a throwaway jail before changing it.
+- **config-ui-x is pinned to 5.30.1.** 5.28.0 & 5.29.0 versions failed the node-pty build in earlier testing. npm 12 now blocks the package's install scripts entirely, and the script's manual `node-gyp rebuild` is what actually builds the module, so newer versions may work. Test with `UI_VERSION=` in a throwaway jail before changing it.
 - **Updating Homebridge UI from the web UI breaks the install.** Rerun `/root/freebsd-homebridge-install.sh` in the jail to repair it; see [Disaster recovery](#disaster-recovery).
 - **Leave Node, npm and node-gyp to pkg.** `npm-node24` already provides `/usr/local/bin/node-gyp`; the script overwrites it with `npm install -g --force node-gyp`, and the next `pkg upgrade` of `npm-node24` will put pkg's version back. Don't run `npm install -g npm@…` when npm suggests it; update with `pkg upgrade`. `hb-service update-node` does not apply on FreeBSD.
 - **Service account has no home folder** (`/nonexistent`, no login). If a plugin fails trying to write to `/nonexistent`, run `pw usermod homebridge -d /var/lib/homebridge` in the jail.
